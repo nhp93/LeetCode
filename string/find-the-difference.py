@@ -1,0 +1,7 @@
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        s_counter = Counter(s)
+        t_counter = Counter(t)
+        for key in t_counter:
+            if t_counter[key] > s_counter[key]:
+                return key
