@@ -5,10 +5,7 @@ class Solution:
             dq.append(i)
         
         while len(dq) > 1:
-            for j in range(k-1):
-                front = dq[0]
-                dq.popleft()
-                dq.append(front)
+            for _ in range(k-1):
+                dq.append(dq.popleft())
             dq.popleft()
-            print(dq)
         return dq[0]
