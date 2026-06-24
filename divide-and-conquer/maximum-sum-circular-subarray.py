@@ -1,7 +1,5 @@
 class Solution:
     def maxSubarraySumCircular(self, nums: List[int]) -> int:
-        count = 0
-        n = len(nums)
         max_curr = min_curr = 0
         max_sum = float('-inf')
         min_sum = float('inf')
@@ -14,6 +12,6 @@ class Solution:
             min_curr = min(num, min_curr + num)
             if min_curr < min_sum:
                 min_sum = min_curr
-        if total < 0:
+        if max_sum < 0:
             return max_sum
         return max(max_sum, total - min_sum)
