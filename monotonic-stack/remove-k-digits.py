@@ -11,4 +11,5 @@ class Solution:
             stack.append(num[i])
         if k > 0:
             stack = stack[:-k]
-        return "".join(stack).lstrip("0")
+        res = "".join(stack).lstrip("0")
+        return res if res else "0"
