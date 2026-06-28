@@ -2,6 +2,8 @@ class Solution:
     def removeKdigits(self, num: str, k: int) -> str:
         stack = []
         n = len(num)
+        if k == n:
+            return "0"
         for i in range(n):
             if not stack:
                 stack.append(num[i])
