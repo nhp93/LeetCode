@@ -17,6 +17,7 @@ class Solution:
                         stack.append(num[i])
                 else:
                     stack.append(num[i])
-        
+        if k > 0:
+            stack = stack[:-k]
         res = "".join(stack)
         return str(int(res))
