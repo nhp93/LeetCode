@@ -19,4 +19,9 @@ class Solution:
                 if num > stack[-1]:
                     stack.pop()
                     stack.append(num)
+                if num < left:
+                    stack.pop()
+                    stack.pop()
+                    stack.append(num)
+                    left = num
         return False
