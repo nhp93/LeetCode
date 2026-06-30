@@ -11,7 +11,7 @@ class Solution:
             cur = cur.next
             count += 1
         if count == n:
-            return None
+            return head.next
         curr = head
         pos = 0
         while curr:
