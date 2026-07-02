@@ -5,24 +5,19 @@
 #         self.next = next
 class Solution:
     def nextLargerNodes(self, head: Optional[ListNode]) -> List[int]:
-        hash_map = {}
-        stack = []
+        nodes = []
         curr = head
         while curr:
-            value = curr.val
-            if value not in hash_map:
-                hash_map[value] = 0
-            if not stack:
-                stack.append(value)
-            else:
-                if value > stack[-1]:
-                    while stack:
-                        hash_map[stack.pop()] = value
-                else:
-                    stack.append(value)
+            nodes.append(curr.val)
             curr = curr.next
+        
+        res = [0] * len(nodes)
+        stack = []
 
-        res = []
-        for val in hash_map.values():
-            res.append(val)
+        for index, value in enumerate(nodes):
+            while stack and value > stack[-1][1]:
+                i, v  = stack.pop()
+                res[i] = value
+            stack.append((index, value))
+        
         return res
