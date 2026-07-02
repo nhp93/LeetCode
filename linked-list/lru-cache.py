@@ -8,7 +8,7 @@ class LRUCache:
 
 
     def get(self, key: int) -> int:
-        if key not in self.map or self.map[key] == 0:
+        if key not in self.map or self.map[key] == -1:
             return -1
         else:
             self.queue.append(key)
@@ -21,7 +21,7 @@ class LRUCache:
         self.queue.append(key)
         self.count += 1
         if self.count > self.capacity:
-            self.map[self.queue.popleft()] = 0
+            self.map[self.queue.popleft()] = -1
         print(self.queue)
         print(self.map)
         
