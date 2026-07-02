@@ -1,30 +1,53 @@
+class ListNode:
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.prev = None
+        self.next = None
+        
 class LRUCache:
 
     def __init__(self, capacity: int):
         self.capacity = capacity
         self.map = {}
-        self.count = 0
-        self.queue = deque()
+        self.head = ListNode(0,0)
+        self.tail = ListNode(0,0)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+
+    def _add(self, node):
+        prev = self.tail.prev
+        prev.next = node
+        node.prev = prev
+        node.next = self.tail
+        self.tail.prev = node
+    
+    def _remove(self, node):
+        prev = node.prev
+        next_node = node.next
+        prev.next = next_node
+        next_node.prev = prev
 
 
     def get(self, key: int) -> int:
-        if key not in self.map or self.map[key] == -1:
-            return -1
+        if key in self.map:
+            node = self.map[key]
+            self._remove(node)
+            self._add(node)
+            return node.val
         else:
-            self.queue.append(key)
-            ind = self.queue.index(key)
-            del self.queue[ind]
-            return self.map[key]
+            return -1
 
     def put(self, key: int, value: int) -> None:
-        self.map[key] = value
-        self.queue.append(key)
-        self.count += 1
-        if self.count > self.capacity:
-            self.map[self.queue.popleft()] = -1
-        print(self.queue)
-        print(self.map)
-        
+        if key in self.map:
+            self._remove(self.map[key])
+        new_node = ListNode(key, value)
+        self._add(new_node)
+        self.map[key] = new_node
+        if len(self.map) > self.capacity:
+            delete = self.head.next
+            self._remove(delete)
+            del self.map[delete.key]
 
 
 
