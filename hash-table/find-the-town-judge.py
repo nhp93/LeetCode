@@ -6,14 +6,10 @@ class Solution:
         for u, v in trust:
             voted.add(u)
             graph[v].append(u)
-        max_len = float('-inf')
-        max_cand = 0
-        for cand in graph:
-            if len(graph[cand]) > max_len and cand not in voted:
-                max_len = len(graph[cand])
-                max_cand = cand
-        if max_cand == 0:
-            return -1
-        return max_cand
-            
+        
+
+        for cand in range(1, n + 1):
+            if len(graph[cand]) == n-1 and cand not in voted:
+                return cand
+        return -1
         
