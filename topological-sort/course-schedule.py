@@ -6,9 +6,21 @@ class Solution:
             u, v = p[0], p[1]
             graph[u].append(v)
         visited = set()
-        for key in graph:
-            visited.add(key)
-            for value in graph[key]:
-                if value in visited:
+        visiting = set()
+        def dfs(course):
+            if course in visiting:
+                return False
+            if course in visited:
+                return True
+            
+            visiting.add(course)
+            for value in graph[course]:
+                if not dfs(value):
                     return False
+            visiting.remove(course)        
+            visited.add(course)
+            return True
+        for c in range(numCourses):
+            if not dfs(c):
+                return False
         return True
