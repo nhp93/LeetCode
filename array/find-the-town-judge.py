@@ -1,29 +1,19 @@
 from collections import defaultdict
 class Solution:
     def findJudge(self, n: int, trust: List[List[int]]) -> int:
-        if len(trust) >= n or len(trust) < n - 2:
+        graph = defaultdict(list)
+        voted = set()
+        for u, v in trust:
+            voted.add(u)
+            graph[v].append(u)
+        max_len = float('-inf')
+        max_cand = 0
+        for cand in graph:
+            if len(graph[cand]) > max_len and cand not in voted:
+                max_len = len(graph[cand])
+                max_cand = cand
+        if max_cand == 0:
             return -1
-
-        graph = defaultdict(int)
-        # visited = set()
-        # visiting = set()
-        # def dfs(person):
-        #     if person in visiting:
-        #         return False
-        #     if person in visited:
-        #         return True
-        #     for c in graph[person]:
-        #         if dfs(c):
-        #             return True
-        #     visiting.remove(course)        
-        #     visited.add(course)
-        #     return False
-        trusted = trust[0][1]
-
-        for p, t in trust:
-            if t != trusted or p == trusted:
-                return -1
-        return trusted
-
-
+        return max_cand
+            
         
