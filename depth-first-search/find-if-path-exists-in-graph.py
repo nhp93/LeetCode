@@ -1,22 +1,47 @@
+from collections import deque
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        
+        # graph = defaultdict(list)
+
+        # for u, v in edges:
+        #     graph[u].append(v)
+        #     graph[v].append(u)
+        
+        # queue = deque([source])
+        # visited = set()
+        # visited.add(source)
+
+        # while queue:
+        #     curr = queue.popleft()
+        #     if curr == destination:
+        #         return True
+            
+        #     for neighbor in graph[curr]:
+        #         if neighbor not in visited:
+        #             visited.add(neighbor)
+        #             queue.append(neighbor)
+        # return False
+
         graph = defaultdict(list)
 
         for u, v in edges:
             graph[u].append(v)
             graph[v].append(u)
         
-        queue = deque([source])
+        dq = deque([source])
         visited = set()
         visited.add(source)
 
-        while queue:
-            curr = queue.popleft()
+        while dq:
+            curr = dq.popleft()
             if curr == destination:
                 return True
             
             for neighbor in graph[curr]:
-                if neighbor not in visited:
+                if neighbor in visited:
+                    continue
+                else:
                     visited.add(neighbor)
-                    queue.append(neighbor)
+                    dq.append(neighbor)
         return False
