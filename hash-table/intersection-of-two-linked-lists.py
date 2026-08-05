@@ -7,11 +7,14 @@
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
         currA, currB = headA, headB
-        while currA:
-            currB = headB
-            while currB:
+        while currA != currB:
+            if currA:
+                currA = currA.next
+            else:
+                currA = headB
+            if currB:
                 currB = currB.next
-                if currA == currB:
-                    return currA
-            currA = currA.next
-        return None
+            else:
+                currB = headA
+        
+        return currA
