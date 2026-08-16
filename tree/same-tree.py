@@ -11,7 +11,7 @@ class Solution:
                 return True
             if tree1 is None or tree2 is None:
                 return False
-            if tree1 != tree2:
+            if tree1.val != tree2.val:
                 return False
             left1, left2 = tree1.left, tree2.left
             right1, right2 = tree1.right, tree2.right
